@@ -127,7 +127,7 @@ thead tr:hover{
 @media (min-width: 1200px) {
     .actionbuttons{
 
-        max-width: 150px;
+        max-width: 100px;
     }
 }
 
