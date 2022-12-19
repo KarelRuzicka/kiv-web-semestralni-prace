@@ -11,9 +11,10 @@ class Controller{
             require_once dirname(__FILE__)."/../../php/database.php";
             $db = Database::get();
 
+           
 
             switch ($_POST["action"]) {                   
-                case 'edit':
+                case 'edit': //Při akci edit vybere všechny údaje dané recenze a přesměruje na stránku recenze
 
                     $query = "SELECT id,rating,comment,id_product FROM reviews WHERE id = ? AND id_user = ?";
             
@@ -27,16 +28,18 @@ class Controller{
                     exit();
 
                     break;
-                case 'delete':
+                case 'delete': //Při akci delete rovnou smaže danou recenze
                             
                 
-                    $query = "DELETE FROM reviews WHERE id = ?";
+                    $query = "DELETE FROM reviews WHERE id = ? AND id_user = ?";
             
                     $stmt = $db->prepare($query);
     
-                    $stmt->execute([$_POST["id"]]);
+                    $stmt->execute([$_POST["id"], $_SESSION["USER_username"]]);
 
                     break;
+
+                    //U obou příkazů je selektováno také podle id uživatele, aby nemohl uživatel podstrčit jinou recenzi
 
             }
 

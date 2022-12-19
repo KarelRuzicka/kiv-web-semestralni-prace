@@ -37,7 +37,7 @@
             <p>Autor: <b>{{review.author}}</b><br>
             Hodnocení: <b>{{review.rating}}</b>/10</p>
             <p>
-            {{review.comment}}
+            {{review.comment | raw}}
             </p>
         </div>
         {% endfor %}

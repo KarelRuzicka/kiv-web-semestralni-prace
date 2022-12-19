@@ -8,7 +8,8 @@ class Model{
 
         $db = Database::get();
 
-        $query = "SELECT id,rating,comment FROM reviews WHERE id_user = ?";
+        //Získá recenze daného uživatele
+        $query = "SELECT reviews.id,products.name,reviews.rating,reviews.comment FROM reviews INNER JOIN products ON reviews.id_product = products.id WHERE id_user = ?";
 
         $stmt= $db->prepare($query);
         $stmt->execute([$_SESSION["USER_username"]]);

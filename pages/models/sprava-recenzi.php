@@ -8,7 +8,8 @@ class Model{
 
         $db = Database::get();
 
-        $query = "SELECT id,id_user,rating,comment,hidden FROM reviews";
+        //Získá informace o recenzích
+        $query = "SELECT reviews.id,reviews.id_user,products.name,reviews.rating,reviews.comment,reviews.hidden FROM reviews INNER JOIN products ON reviews.id_product = products.id";
             
         $result = $db->query($query)->fetchAll();
 

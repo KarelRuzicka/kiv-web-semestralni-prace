@@ -1,11 +1,12 @@
 RewriteEngine On
 
-
+# Zakáže všechny .php soubory
 <Files *.php>
     Order Deny,Allow
     Deny from all
 </Files>
 
+# kromě souborů index.php a .ajax.php
 <Files *.ajax.php>
     Order Allow,Deny
     Allow from all
@@ -17,7 +18,7 @@ RewriteEngine On
 </Files>
 
 
-# exclude existing files and redirect everyting else
+# Neexistující soubory přesměruje na index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [L]

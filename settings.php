@@ -32,7 +32,9 @@
         'error' => 0
     ]);
 
-/** Systémové stránky */
+/** 
+ * Systémové stránky 
+ */
     define("DEFAULT_PAGE", 'uvod');
     define("NOT_FOUND_PAGE", 'stranka-nenalezena');
     define("ERROR_PAGE", 'error');

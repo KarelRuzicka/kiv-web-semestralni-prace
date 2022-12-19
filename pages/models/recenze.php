@@ -5,6 +5,7 @@ class Model{
 
     function data():array{
 
+        //Převede id produktu na data
         if(isset($_SESSION['product-id'])){
             $data['review']['id_product'] = $_SESSION['product-id'];
             $data['previous_page'] = "/".ROOT_DIR."pokrm?id=".$_SESSION['product-id'];
@@ -12,6 +13,7 @@ class Model{
             return $data;
         }
 
+        //Převede query data na data
         if(isset($_SESSION['query_edit'])){
             $data['review'] = $_SESSION['query_edit'];
             $data['previous_page'] = "/".ROOT_DIR."moje-recenze";

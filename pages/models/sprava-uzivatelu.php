@@ -8,6 +8,8 @@ class Model{
 
         $db = Database::get();
 
+
+        //Získá informace o uživatelích
         $query = "SELECT username,name,access_level FROM users";
             
         $result = $db->query($query)->fetchAll();

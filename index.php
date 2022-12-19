@@ -1,13 +1,14 @@
 <?php
 /**
- * Hlavni controller
+ * Hlavní controller
  */
 
 $application = new Application();
 
 
-//TODO cyhbové hlášky
-
+/**
+ * Aplikace
+ */
 class Application{
 
     public function __construct()
@@ -30,6 +31,7 @@ class Application{
         });
 
 
+        //MVC
         $page = $this->get_requested_page();
         $this->run_controller(page: $page);
         $data = $this->get_data_from_model(page: $page);
@@ -64,14 +66,25 @@ class Application{
             return NOT_FOUND_PAGE;
         }
 
-        //Kontroluje jestli má uživatel přístup
-        $access_level = isset($_SESSION["USER_access_level"]) ? $_SESSION["USER_access_level"] : 0;
+        //Zabezpečen stránky
+        if(PAGES[$url] > 0){
+            //Když není uživatel přihlášen, vrátí přihlašovací stránku
+            if (!isset($_SESSION["USER_access_level"])) {
+                return LOGIN_PAGE;
+            }
 
-        if ($access_level < PAGES[$url]) {
-            return LOGIN_PAGE;
+            //Když je uživatel přihlášen, ale nemá na stránku přístup
+            if ($_SESSION["USER_access_level"] < PAGES[$url]) {
+                return DEFAULT_PAGE;
+            }
+
+            return $url;
+
+        }else{
+            return $url;
         }
 
-        return $url;
+        
     }
 
 
@@ -88,7 +101,7 @@ class Application{
             $data = $model->data();
         }
 
-        //Přidání základních dat
+        //Přidání základních dat - nelze bohužel udělat přímo z modelu bez náročných kompikací
         $data["current_page"] = $page;
 
         if (isset($_SESSION["USER_username"])) {
@@ -101,15 +114,18 @@ class Application{
 
     
     /**
-     * Spustí funkci kontrolleru
+     * Spustí funkci controlleru
      */
     private function run_controller(string $page){
+
+        //Kontrola jestli controller existuje
         if (!file_exists("pages/controllers/".$page.".php")) {
             return array();
         }
 
         require_once "pages/controllers/".$page.".php";
 
+        //Spustí controller
         new Controller();
     }
 

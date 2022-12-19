@@ -11,7 +11,7 @@ class Controller{
             $db = Database::get();
 
             switch ($_POST["action"]) {                   
-                case 'edit':
+                case 'edit': //Při akci edit vybere všechny údaje daného pokrmu a přesměruje na stránku uprava-pokrmu
 
                     $query = "SELECT id,name,description,price FROM products WHERE id = ?";
             
@@ -25,7 +25,7 @@ class Controller{
                     exit();
                     
                     break;
-                case 'delete':
+                case 'delete': //Při akci delete rovnou smaže daný pokrm
                             
                     
                     $query = "DELETE FROM products WHERE id = ?";
@@ -34,7 +34,7 @@ class Controller{
     
                     $stmt->execute([$_POST["id"]]);
 
-                                
+                    //Kaskádové mazání
                     $query = "DELETE FROM reviews WHERE id_product = ?";
 
                     $stmt = $db->prepare($query);

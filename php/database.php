@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Třída zpostředkující připojení k data
+ */
 class Database{
 
     /** Odkaz na jedináčka */
@@ -15,6 +17,9 @@ class Database{
         $this->pdo->exec("set names utf8");
     }
 
+    /**
+     * Vrátí instanci PDO, připojenou k databázi
+     */
     public static function get(){
         if(empty(self::$database)){
             self::$database = new Database();

@@ -13,7 +13,7 @@ class Controller{
 
 
             switch ($_POST["action"]) {                   
-                case 'hide':
+                case 'hide'://Schová danou recenzi
 
                     $query = "UPDATE reviews SET hidden = 1 WHERE id = ?";
             
@@ -23,7 +23,7 @@ class Controller{
                     
                     
                     break;
-                case 'show':
+                case 'show'://Zobrazí danou recenzi
 
                     $query = "UPDATE reviews SET hidden = 0 WHERE id = ?";
                 
@@ -34,7 +34,7 @@ class Controller{
                         
                     break;
 
-                case 'delete':
+                case 'delete'://Smaže danou recenzi
                             
                 
                     $query = "DELETE FROM reviews WHERE id = ?";

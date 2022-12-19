@@ -22,7 +22,7 @@ class Controller{
 
 
             switch ($_POST["action"]) {                   
-                case 'approve':
+                case 'approve'://Shválí uživatele = nastaví mu access level na 1
 
                     $query = "UPDATE users SET access_level = 1 WHERE username = ?";
             
@@ -32,7 +32,7 @@ class Controller{
                     
                     
                     break;
-                case 'promote':
+                case 'promote': //Povýší uživatele = nastaví mu access level na 2
 
                     $query = "UPDATE users SET access_level = 2 WHERE username = ?";
                 
@@ -43,7 +43,7 @@ class Controller{
                         
                     break;
 
-                case 'demote':
+                case 'demote': //Sníží daného uživatele é nastaví mu access level na 1
 
                         $query = "UPDATE users SET access_level = 1 WHERE username = ?";
                     
@@ -53,7 +53,7 @@ class Controller{
                         
                             
                         break;
-                case 'delete':
+                case 'delete': //Smaže daného uživatele
                             
                     
                     $query = "DELETE FROM users WHERE username = ?";
@@ -63,6 +63,7 @@ class Controller{
                     $stmt->execute([$_POST["username"]]);
 
 
+                    //Kaskádové mazání
                     $query = "DELETE FROM reviews WHERE id_user = ?";
             
                     $stmt = $db->prepare($query);

@@ -18,6 +18,7 @@
         <table class="table table-bordered">
             <thead>
             <tr>
+                <th>Pokrm</th>
                 <th>Hodnocení</th>
                 <th>Uživatel</th>
                 <th>Komentář</th>
@@ -29,9 +30,10 @@
             <tbody>
             {% for review in reviews %}
             <tr>
+                <td>{{review.name}}</td>
                 <td>{{review.rating}}/10</td>
                 <td>{{review.id_user}}</td>
-                <td>{{review.comment}}</td>
+                <td>{{review.comment | raw}}</td>
                 {% if review.hidden == 0 %}
                 <td>NE</td>
                 {% else %}

@@ -8,6 +8,7 @@ class Model{
 
         $db = Database::get();
 
+        //Získá informace o produktech
         $query = "SELECT id,name,description,price FROM products";
             
         $result = $db->query($query)->fetchAll();
