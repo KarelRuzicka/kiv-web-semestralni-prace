@@ -1,0 +1,47 @@
+{% extends "base.template.twig" %}
+
+{% block title %}
+<title>Správa pokrmů</title>
+{% endblock %}
+
+{% block body %}
+
+    {% include("navbar.template.twig") %}
+
+    
+    <div class="container">
+        <div class="tablediv">
+        <h2 class="lefttext">Správa pokrmů</h2>
+        <div class="rightbutton"><a href="uprava-pokrmu"><button type="button" class="btn btn-default">Přidat</button></a></div>
+
+        <div style="clear: both;"></div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Název</th>
+                <th>Popis</th>
+                <th>Cena</th>
+                <th>&nbsp&nbspAkce</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td><form method="POST" action=""><input type="hidden" name="id" value="{{product.id}}"><button class="tablebuttontext text-primary" type="submit" name="action" value="edit">Upravit</button> &nbsp <button class="tablebuttontext text-danger" type="submit" name="action" value="delete">Odstranit</button></form></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="js/uvod.js"></script>
+{% endblock %}

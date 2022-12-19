@@ -1,0 +1,37 @@
+{% extends "base.template.twig" %}
+
+{% block title %}
+<title>Recenze</title>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <div class="col-sm-4 col-sm-offset-4 col-xs-12 form">
+
+        <form action="" method="POST">
+
+            <div class="form-group">
+                <label for="rating">Hodnocení (1-10):</label>
+                <input type="number" min="1" max="10" placeholder="Hodnocení (1-10)" class="form-control" id="rating" name="rating" required value={{review.rating}}>
+            </div>
+            <div class="form-group">
+                <label for="comment">Heslo:</label>
+                <textarea class="form-control" id="comment" placeholder="Komentář" name="comment" required rows="3" maxlength="300">{{review.comment}}</textarea>
+            </div>
+            <input type="hidden" name="id" value="{{review.id}}">
+            <input type="hidden" name="id_product" value="{{review.id_product}}">
+            <input type="hidden" name="previous_page" value="{{previous_page}}">
+            <button type="submit" class="btn btn-primary btn-block">Odeslat</button>
+        </form>
+
+    
+    </div>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.template.twig" %}
+
+{% block title %}
+<title>Registrace</title>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col-sm-4 col-sm-offset-4 col-xs-12 form small-center">
+
+        {% if ERROR != "" %}
+
+        <div class="alert alert-danger">
+        {{ERROR}}
+        </div>
+
+        {% endif %}
+        
+
+        <form action="" method="POST">
+             <div class="form-group">
+                <label for="name">Jméno a příjmení</label>
+                <input type="text" class="form-control" id="name" placeholder="Jméno a příjmení" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Přihlašovací jméno</label>
+                <input type="text" class="form-control" id="username" placeholder="Přihlašovací jméno" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Heslo:</label>
+                <input type="password" class="form-control" id="password" placeholder="Heslo" name="password" required>
+            </div>
+            <!--<div class="checkbox">
+                <label><input type="checkbox" class="form-check-input" name="remember" checked> Pamatujte si mě</label>
+            </div>-->
+            <button type="submit" class="btn btn-primary btn-block">Registrovat</button>
+            <input type="hidden" name="previous_page" value="{{previous_page}}">
+        </form>
+
+        <div class="text-center">
+            <p><br>Již máte účet? <a href="prihlaseni">Přihlašte se</a></p>
+        </div>
+    
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.template.twig" %}
+
+{% block title %}
+<title>Moje recenze</title>
+{% endblock %}
+
+{% block body %}
+
+    {% include("navbar.template.twig") %}
+
+    
+    <div class="container">
+        <div class="tablediv">
+        <h2 class="lefttext">Moje recenze</h2>
+
+        <div style="clear: both;"></div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Hodnocení</th>
+                <th>Komentář</th>
+                <th>&nbsp&nbspAkce</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for review in reviews %}
+            <tr>
+                <td>{{review.rating}}/10</td>
+                <td>{{review.comment}}</td>
+
+                <td class="actionbuttons">
+                    <form method="POST" action="">
+                        <input type="hidden" name="id" value="{{review.id}}">
+                            <button class="tablebuttontext text-primary" type="submit" name="action" value="edit">Upravit</button> 
+                            &nbsp 
+                            <button class="tablebuttontext text-danger" type="submit" name="action" value="delete">Odebrat</button>     
+                    </form>
+                </td>
+                       
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="js/uvod.js"></script>
+{% endblock %}

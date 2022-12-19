@@ -1,0 +1,76 @@
+{% extends "base.template.twig" %}
+
+{% block title %}
+<title>Správa uživatelů</title>
+{% endblock %}
+
+{% block body %}
+
+    {% include("navbar.template.twig") %}
+
+    
+    <div class="container">
+        <div class="tablediv">
+        <h2 class="lefttext">Správa uživatelů</h2>
+
+        <div style="clear: both;"></div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Uživatelské jméno</th>
+                <th>Jméno a příjmení</th>
+                <th>Úroveň oprávnění</th>
+                <th>&nbsp&nbspAkce</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>
+                {% if user.access_level == 0 %}
+                Neschálený uživatel
+                {% elseif user.access_level == 1 %}
+                Konzument
+                {% elseif user.access_level == 2 %}
+                Správce
+                {% elseif user.access_level == 3 %}
+                Administrátor
+                {% endif %}
+                
+                </td>
+                <td class="actionbuttons">
+                    <form method="POST" action="">
+                        <input type="hidden" name="username" value="{{user.username}}">
+                            {% if user.access_level == 0 %}
+                                <button class="tablebuttontext text-primary" type="submit" name="action" value="approve">Schválit</button> 
+                                &nbsp 
+                                <button class="tablebuttontext text-danger" type="submit" name="action" value="delete">Odebrat</button>
+                            {% elseif user.access_level == 1 %}
+                                <button class="tablebuttontext text-primary" type="submit" name="action" value="promote">Povýšit</button> 
+                                &nbsp 
+                                <button class="tablebuttontext text-danger" type="submit" name="action" value="delete">Odebrat</button>
+                            {% elseif user.access_level == 2 %}
+                                <button class="tablebuttontext text-primary" type="submit" name="action" value="demote">Snížit</button> 
+                                &nbsp 
+                                <button class="tablebuttontext text-danger" type="submit" name="action" value="delete">Odebrat</button>
+                            {% endif %}
+                             
+                    </form>
+                </td>
+                       
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="js/uvod.js"></script>
+{% endblock %}

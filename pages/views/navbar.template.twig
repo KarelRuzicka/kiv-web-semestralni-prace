@@ -1,0 +1,52 @@
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+
+                <a class="navbar-brand" href="./">Restaurace</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="{{ current_page == "uvod" ? 'active' }}"><a href="./">Hlavní stránka</a></li>
+                    {#<li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kategorie <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ current_page == "a" ? 'active' }}"><a href="#">Page 1-1</a></li>
+                        <li class="{{ current_page == "b" ? 'active' }}"><a href="#">Page 1-2</a></li>
+                        <li class="{{ current_page == "c" ? 'active' }}"><a href="#">Page 1-3</a></li>
+                    </ul>
+                    </li>#}
+
+                    {% if USER_access_level == 1 %}
+                    <li class="{{ current_page == "moje-recenze" ? 'active' }}"><a href="moje-recenze">Moje recenze</a></li>
+                    {% elseif USER_access_level > 1 %}
+                    <li class="{{ current_page == "sprava-recenzi" ? 'active' }}"><a href="sprava-recenzi">Správa recenzí</a></li>
+                    {% endif %}
+                    {% if USER_access_level >= 2 %}
+                    <li class="{{ current_page == "sprava-pokrmu" ? 'active' }}"><a href="sprava-pokrmu">Správa pokrmů</a></li>
+                    {% endif %}
+                    {% if USER_access_level >= 3 %}
+                    <li class="{{ current_page == "sprava-uzivatelu" ? 'active' }}"><a href="sprava-uzivatelu">Správa uživatelů</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right user-menu">
+                <li>
+                    {% if USER_username == "" %}
+                    <li><a href="registrace"><span class="glyphicon glyphicon-user"></span> Zaregistrovat se</a></li>
+                    <li><a href="prihlaseni"><span class="glyphicon glyphicon-log-in"></span> Přihlásit se</a></li>
+                    {% else %}
+                    <li><p class="navbar-text">Uživatel: {{USER_username}} </p></li>
+                    <li><a href="odhlaseni"><span class="glyphicon glyphicon-log-out"></span> Odhlásit se</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

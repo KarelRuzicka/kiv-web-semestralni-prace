@@ -1,0 +1,48 @@
+{% extends "base.template.twig" %}
+
+{% block title %}
+<title>{{product.name}}</title>
+{% endblock %}
+
+{% block body %}
+
+    {% include("navbar.template.twig") %}
+
+    <div class="jumbotron text-center">
+        <h2><b>{{product.name}}</b></h2>
+        <p>{{product.description}}</p>
+
+        <p><b>{{product.price}}</b> Kč<br>
+        Hodnocení: {% if product.rating > 0%}<b>{{product.rating | round(1)}}</b>/10{% else %} Nehodnoceno {% endif %}</p>
+                
+        
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h2>Recenze:</h2>
+                {% if USER_access_level >= 1 %}
+                <br>
+                <form method="POST" action="">
+                   <button type="submit" class="btn btn-default" name="id" value={{product.id}}>Přidat recenzi</button></a>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+
+        {% for review in reviews %}
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 review small-center">
+            <p>Autor: <b>{{review.author}}</b><br>
+            Hodnocení: <b>{{review.rating}}</b>/10</p>
+            <p>
+            {{review.comment}}
+            </p>
+        </div>
+        {% endfor %}
+        
+    </div>
+
+{% endblock %}
+
